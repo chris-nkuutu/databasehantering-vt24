@@ -5,7 +5,7 @@ USE university_application;
 
 
 
-CREATE TABLE university (university_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE universities (university_id INT PRIMARY KEY AUTO_INCREMENT,
        
         university_name VARCHAR (255) NOT NULL,
         address VARCHAR (255),
@@ -18,10 +18,10 @@ CREATE TABLE university (university_id INT PRIMARY KEY AUTO_INCREMENT,
 
 CREATE TABLE courses (course_id INT PRIMARY KEY AUTO_INCREMENT,
         university_id INT NOT NULL,
-        FOREIGN KEY (university_id) REFERENCES university(university_id),
+        FOREIGN KEY (university_id) REFERENCES universities (university_id),
         course_name VARCHAR (255),
         teacher VARCHAR (255),
-        credits VARCHAR (255)
+        credits INT NOT NULL;
         
         
         );
@@ -36,12 +36,15 @@ CREATE TABLE students (student_id INT PRIMARY KEY AUTO_INCREMENT,
         );
         
         
-CREATE TABLE student_course (student_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE student_course_grades (student_course_id INT PRIMARY KEY AUTO_INCREMENT,
+        student_id INT NOT NULL,
         course_id INT NOT NULL,
         grade VARCHAR (255),
-        start_date VARCHAR (255),
-        end_date VARCHAR (255),
+        start_date DATE,
+        end_date DATE,
         FOREIGN KEY (course_id) REFERENCES courses (course_id)
+        FOREIGN KEY (student_id) REFERENCES courses (student_id)
+       
         
         );
         
